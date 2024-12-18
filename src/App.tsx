@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 
 function App() {
   const targetDate = new Date('2024-12-19T09:00:00'); // Set target date and time
-  const [timeLeft, setTimeLeft] = useState(targetDate - new Date());
-  const canvasRef = useRef(null);
-  const particlesRef = useRef([]);
+  const [timeLeft, setTimeLeft] = useState(targetDate.getTime() - new Date().getTime());
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const particlesRef = useRef<any[]>([]);
 
   useEffect(() => {
     document.body.style.margin = '0';
@@ -14,9 +14,10 @@ function App() {
     document.body.style.overflow = 'hidden';
     document.documentElement.style.height = '100%';
     document.documentElement.style.backgroundColor = 'black';    
+
     const intervalId = setInterval(() => {
       const currentTime = new Date();
-      const newTimeLeft = targetDate - currentTime;
+      const newTimeLeft = targetDate.getTime() - currentTime.getTime();
       setTimeLeft(newTimeLeft);
 
       if (newTimeLeft <= 0) {
@@ -29,8 +30,12 @@ function App() {
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    if (!canvas) return;
+
     const ctx = canvas.getContext('2d');
-    const particles = [];
+    if (!ctx) return;
+
+    const particles: any[] = [];
     particlesRef.current = particles;
 
     canvas.width = window.innerWidth;
@@ -124,6 +129,7 @@ function App() {
           justifyContent: 'center',
           alignItems: 'center',
           height: '100%',
+          textShadow: '0 0 5px white, 0 0 10px white, 0 0 10px white', // Glowing effect
         }}
       >
         <p>
