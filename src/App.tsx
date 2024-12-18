@@ -50,7 +50,7 @@ function App() {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 12 + 8, // Larger square size
+        size: Math.random() * 2 + 2, // Smaller square size (between 4 and 8)
         dx: (Math.random() - 0.5) * 2,
         dy: (Math.random() - 0.5) * 2,
         color: `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 1)`, // Solid color
@@ -123,18 +123,28 @@ function App() {
           zIndex: 10,
           textAlign: 'center',
           fontFamily: 'monospace',
-          fontSize: '15rem',
+          fontSize: '5vw', // Use viewport width for responsive font size
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          height: '100%',
-          textShadow: '0 0 5px white, 0 0 10px white, 0 0 10px white', // Glowing effect
+          height: '100%',          
         }}
       >
         <p>
           {hours}h {minutes}m {seconds}s
         </p>
       </div>
+
+      {/* Responsive adjustment for smaller screens */}
+      <style>
+        {`
+          @media (max-width: 600px) {
+            div > p {
+              font-size: 10vw; /* Increase font size on smaller screens */
+            }
+          }
+        `}
+      </style>
     </div>
   );
 }
