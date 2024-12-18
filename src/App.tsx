@@ -31,7 +31,7 @@ function App() {
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+    if (!ctx) return; // Guard clause for null ctx
 
     const particles: any[] = [];
     particlesRef.current = particles;
@@ -59,13 +59,15 @@ function App() {
     }
 
     function drawParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach((particle) => {
-        if (particle.visible) {
-          ctx.fillStyle = particle.color;
-          ctx.fillRect(particle.x, particle.y, particle.size, particle.size); // Square particles
-        }
-      });
+      if (ctx) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach((particle) => {
+          if (particle.visible) {
+            ctx.fillStyle = particle.color;
+            ctx.fillRect(particle.x, particle.y, particle.size, particle.size); // Square particles
+          }
+        });
+      }
     }
 
     function updateParticles() {
@@ -105,6 +107,7 @@ function App() {
   }, [timeLeft]);
 
   // Convert time left into days, hours, minutes, and seconds
+  const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
   const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
