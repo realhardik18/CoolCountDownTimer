@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 function App() {
   const targetDate = new Date('2024-12-19T09:00:00'); // Set target date and time
   const [timeLeft, setTimeLeft] = useState(targetDate.getTime() - new Date().getTime());
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(document.createElement('canvas'));
   const particlesRef = useRef<any[]>([]);
 
   useEffect(() => {
@@ -30,8 +30,6 @@ function App() {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
-
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
