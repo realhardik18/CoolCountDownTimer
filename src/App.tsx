@@ -123,7 +123,7 @@ function App() {
           zIndex: 10,
           textAlign: 'center',
           fontFamily: 'monospace',
-          fontSize: '5vw', // Use viewport width for responsive font size
+          fontSize: '12vw', // Use viewport width for responsive font size
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -140,7 +140,7 @@ function App() {
         {`
           @media (max-width: 600px) {
             div > p {
-              font-size: 10vw; /* Increase font size on smaller screens */
+              font-size: 25vw; /* Increase font size on smaller screens */
             }
           }
         `}
