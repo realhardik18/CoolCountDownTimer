@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 
 function App() {
-  const targetDate = new Date('2025-01-24T20:40:00'); // Set target date and time
+  const targetDate = new Date('2026-01-14T20:40:00'); // Set target date and time
   const [timeLeft, setTimeLeft] = useState(targetDate.getTime() - new Date().getTime());
   const canvasRef = useRef<HTMLCanvasElement>(document.createElement('canvas'));
   const particlesRef = useRef<any[]>([]);
